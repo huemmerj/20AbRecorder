@@ -4,7 +4,7 @@
 	/**
 	 * @type {string[]}
 	 */
-	let player = ['Jens'];
+	let player = [];
 	let started = false;
 </script>
 
