@@ -1,21 +1,32 @@
 <script>
 	/**
-	 * @type {string[]}
-	 */
-	export let player;
-
-	/**
 	 * @type {boolean}
 	 */
 	export let started = false;
+
+	/**
+	 * @type Game
+	 */
+	export let game;
 </script>
 
 <tbody>
-	<tr>
-		{#if started}
-			{#each player as p}
-				<td>20</td>
+	{#if started}
+		{#each game.rounds as round}
+			<tr>
+				<td />
+				{#each round.points as p}
+					<td>{p}</td>
+				{/each}
+			</tr>
+		{/each}
+	{/if}
+	{#if started}
+		<tr>
+			<td>Select</td>
+			{#each game.players as p}
+				<td />
 			{/each}
-		{/if}
-	</tr>
+		</tr>
+	{/if}
 </tbody>
