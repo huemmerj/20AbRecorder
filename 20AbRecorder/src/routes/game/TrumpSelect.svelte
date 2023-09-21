@@ -5,7 +5,6 @@
 </script>
 
 <select name="Trumpf" bind:value={trump} on:change={(newTrump) => { dispatch("newTrump", trump)}} id="Trumpf">
-	<option value=0>Bitte Wählen</option>
 	<option value=2>Herz</option>
 	<option value=1>Blatt</option>
 	<option value=1>Schellen</option>
