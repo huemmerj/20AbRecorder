@@ -10,10 +10,15 @@
 	$: currentStiches = Array<number>(players.length).fill(0);
 	
 	$: trump = 0;
+
+	$: notReady = currentStiches.reduce((pv, cv) => pv + cv, 0) != 5 || trump == 0;
 	const submitRound = () => {
 		game.push(Array<number>());
 		for (let i = 0; i < players.length; i++) {
 			let last = game[game.length - 2][i];
+			if (currentStiches[i] == -1) {
+				game[game.length - 1][i] = last + trump;
+			}
 			game[game.length - 1][i] = last - currentStiches[i]*trump;
 		}
 		game = [...game];
@@ -52,7 +57,13 @@
 		</tr>
 		{#if !gameOver}
 			<tr>
-				<td><button on:click={submitRound}>+</button></td>
+				<td>
+					{#if notReady}
+						<button disabled>+</button>
+					{:else}
+						<button on:click={submitRound}>+</button>
+					{/if}
+				</td>
 			</tr>
 		{/if}
 	{/if}

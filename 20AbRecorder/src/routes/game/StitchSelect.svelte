@@ -6,6 +6,7 @@
 	export let leftStiches: number = 5;
 </script>
 <select bind:value={stiches} on:change={ () => dispatch('changeStiches', stiches)} name="stiches">
+	<option value=-1>Geht</option>
 	{#each Array(leftStiches+stiches + 1) as _, i}
 		<option value={i}>{i}</option>
 	{/each}
