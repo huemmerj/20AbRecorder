@@ -2,12 +2,13 @@
 
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-	export let stiches: number = 0;
-	export let leftStiches: number = 5;
+	export let stiches: number;
+	export let leftStiches: number;
 </script>
 <select bind:value={stiches} on:change={ () => dispatch('changeStiches', stiches)} name="stiches">
 	<option value=-1>Geht</option>
-	{#each Array(leftStiches+stiches + 1) as _, i}
-		<option value={i}>{i}</option>
+	<option value=-5>0</option>
+	{#each Array(leftStiches+stiches) as _, i}
+		<option value={i+1}>{i+1}</option>
 	{/each}
 </select>
