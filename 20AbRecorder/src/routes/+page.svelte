@@ -31,6 +31,6 @@
 	<Body started={started} {game} {players}/>
 </table>
 
-{#if !started}
+{#if !started && players.length > 1}
 	<button on:click={initGame}>Start Game</button>
 {/if}
