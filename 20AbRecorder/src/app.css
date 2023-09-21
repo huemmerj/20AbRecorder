@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #2f2f2f;
+  color: #fff;
+}
+
+button {
+    background-color: #2f2f2f;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #2f2f2f;
+}
+td:hover {background-color: #2f2f2f;}
+
+tr:hover {background-color: #2f2f2f;}
+
+input {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+    background-color: #2f2f2f;
+}
+
+select {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+    background-color: #2f2f2f;
+}

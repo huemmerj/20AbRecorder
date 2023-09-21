@@ -11,7 +11,7 @@
 	
 	$: trump = 0;
 
-	$: notReady = currentStiches.reduce((pv, cv) => pv + cv, 0) != 5 || trump == 0;
+	$: notReady = currentStiches.reduce((pv, cv) => cv == -1? pv:pv + cv, 0) != 5 || trump == 0;
 	const submitRound = () => {
 		game.push(Array<number>());
 		for (let i = 0; i < players.length; i++) {
@@ -49,7 +49,7 @@
 		<tr>
 			{#if !gameOver}<td><TrumpSelect {trump} on:newTrump={(newTrump) => trump = newTrump.detail}/></td>{/if}
 			{#each players as p, i}
-				<td><StitchSelect stiches={currentStiches[i]} leftStiches={currentStiches.reduce((pv, cv)=> pv - cv, 5)} on:changeStiches={(stiches) => {
+				<td><StitchSelect stiches={currentStiches[i]} leftStiches={currentStiches.reduce((pv, cv)=> cv == -1? pv: pv - cv, 5)} on:changeStiches={(stiches) => {
 					currentStiches[i] = stiches.detail;
 					currentStiches = [...currentStiches];
 				}}/> </td>
