@@ -1,35 +1,60 @@
-<script>
+<script lang=ts>
 	import StitchSelect from './StitchSelect.svelte';
 	import TrumpSelect from './TrumpSelect.svelte';
 
-	/**
-	 * @type {boolean}
-	 */
+	export let gameOver = false;
 	export let started = false;
+	export let game: Array<Array<number>>;
+	export let players: Array<string>;
+		// initialize every with 0 stiches
+	$: currentStiches = Array<number>(players.length).fill(0);
+	
+	$: trump = 0;
+	const submitRound = () => {
+		game.push(Array<number>());
+		for (let i = 0; i < players.length; i++) {
+			let last = game[game.length - 2][i];
+			game[game.length - 1][i] = last - currentStiches[i]*trump;
+		}
+		game = [...game];
+		trump = 0;
+		currentStiches = Array<number>(players.length).fill(0);
+		checkWin();
+	};
 
-	/**
-	 * @type Game
-	 */
-	export let game;
+	const checkWin = () => {
+		game[game.length - 1].forEach((p) => {
+			if (p <= 0) {
+				gameOver = true;
+			}
+		});
+	};
 </script>
 
 <tbody>
 	{#if started}
-		{#each game.rounds as round}
+		{#each game as round}
 			<tr>
 				<td />
-				{#each round.points as p}
+				{#each round as p}
 					<td>{p}</td>
 				{/each}
 			</tr>
 		{/each}
-	{/if}
-	{#if started}
 		<tr>
-			<td><TrumpSelect /></td>
-			{#each game.players as p}
-				<td><StitchSelect /> </td>
+			{#if !gameOver}<td><TrumpSelect {trump} on:newTrump={(newTrump) => trump = newTrump.detail}/></td>{/if}
+			{#each players as p, i}
+				<td><StitchSelect stiches={currentStiches[i]} leftStiches={currentStiches.reduce((pv, cv)=> pv - cv, 5)} on:changeStiches={(stiches) => {
+					currentStiches[i] = stiches.detail;
+					currentStiches = [...currentStiches];
+				}}/> </td>
 			{/each}
 		</tr>
+		{#if !gameOver}
+			<tr>
+				<td><button on:click={submitRound}>+</button></td>
+			</tr>
+		{/if}
 	{/if}
+
 </tbody>

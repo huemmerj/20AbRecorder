@@ -1,46 +1,37 @@
-<script>
+<script lang=ts>
 	import Header from './Header.svelte';
 	import Body from './Body.svelte';
-
-	/**
-	 * @type Game
-	 */
-	let game = {
-		players: [],
-		rounds: [],
-		started: false
-	};
+	$: started = false;
+	$: players = Array<string>();
+	$: game = Array<Array<number>>();
 	let initGame = () => {
-		game.rounds = [
-			{ points: [], trump: '' },
-			{ points: [], trump: '' }
-		];
-		game.players.forEach((p) => {
-			game.rounds[0].points.push(20);
-			game.rounds[1].points.push(-1);
+		started = true;
+		game.push(Array<number>())
+		players.forEach((_) => {
+			game[0].push(20);
 		});
-		game.started = true;
+		game = [...game];
 	};
 </script>
 
 <table>
 	<thead>
 		<th />
-		{#each game.players as p}
+		{#each players as p}
 			<th>{p}</th>
 		{/each}
 		<Header
 			on:addPlayer={(name) => {
-				console.log(game.players);
-				game.players = [...game.players, name.detail];
+				console.log(players);
+				players = [...players, name.detail];
 			}}
-			started={game.started}
+			started={started}
 		/>
 	</thead>
-	<Body started={game.started} {game} />
+	<Body started={started} {game} {players}/>
 </table>
 
-{#if game.started}
+{#if started}
 	<p>Game started</p>
 {:else}
 	<button on:click={initGame}>Start Game</button>
