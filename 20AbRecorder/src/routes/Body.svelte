@@ -50,10 +50,17 @@
 		<tr>
 			<td><TrumpSelect {trump} on:newTrump={(newTrump) => trump = newTrump.detail}/></td>
 			{#each players as p, i}
-				<td><StitchSelect stiches={currentStiches[i]} leftStiches={currentStiches.reduce((pv, cv)=> cv <0? pv: pv - cv, 5)} on:changeStiches={(stiches) => {
-					currentStiches[i] = stiches.detail;
-					currentStiches = [...currentStiches];
-				}}/> </td>
+				<td>
+					<StitchSelect
+						stiches={currentStiches[i]}
+						leftStiches={currentStiches.reduce((pv, cv)=> cv <0? pv: pv - cv, 5)}
+						on:changeStiches={(stiches) => {
+							currentStiches[i] = stiches.detail;
+							currentStiches = [...currentStiches];
+						}}
+						points={game[game.length-1][i]}
+					/> 
+				</td>
 			{/each}
 		</tr>
 		{/if}
