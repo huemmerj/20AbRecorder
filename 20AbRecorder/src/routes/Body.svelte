@@ -28,6 +28,7 @@
 	};
 
 	const checkWin = () => {
+		console.log(game)
 		game[game.length - 1].forEach((p) => {
 			if (p <= 0) {
 				gameOver = true;

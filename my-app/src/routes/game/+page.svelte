@@ -11,9 +11,13 @@
 		started: false
 	};
 	let initGame = () => {
-		game.rounds = [{ points: [], trump: '' }];
+		game.rounds = [
+			{ points: [], trump: '' },
+			{ points: [], trump: '' }
+		];
 		game.players.forEach((p) => {
 			game.rounds[0].points.push(20);
+			game.rounds[1].points.push(-1);
 		});
 		game.started = true;
 	};

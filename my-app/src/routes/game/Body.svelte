@@ -1,4 +1,7 @@
 <script>
+	import StitchSelect from './StitchSelect.svelte';
+	import TrumpSelect from './TrumpSelect.svelte';
+
 	/**
 	 * @type {boolean}
 	 */
@@ -23,9 +26,9 @@
 	{/if}
 	{#if started}
 		<tr>
-			<td>Select</td>
+			<td><TrumpSelect /></td>
 			{#each game.players as p}
-				<td />
+				<td><StitchSelect /> </td>
 			{/each}
 		</tr>
 	{/if}
